@@ -1,1 +1,1 @@
-# Clea-Architecture-MVVM-Notes
+# Clean-Architecture-MVVM-Notes

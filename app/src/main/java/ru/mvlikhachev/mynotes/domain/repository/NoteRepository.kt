@@ -1,14 +1,23 @@
 package ru.mvlikhachev.mynotes.domain.repository
 
-import ru.mvlikhachev.mynotes.data.local.dao.NoteRepositoryImpl
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 import ru.mvlikhachev.mynotes.domain.model.Note
-import javax.inject.Inject
 
-class NoteRepository @Inject constructor(private val noteRepositoryImpl: NoteRepositoryImpl) {
+@Dao
+interface NoteRepository {
 
-    suspend fun getAllNotes(): List<Note> = noteRepositoryImpl.getAllNotes()
-    suspend fun insertNote(note: Note) = noteRepositoryImpl.insertNote(note = note)
-    suspend fun deleteNote(note: Note) = noteRepositoryImpl.deleteNote(note = note)
-    suspend fun getNoteById(id: Long) = noteRepositoryImpl.getNoteById(nodeId = id)
+    @Insert
+    suspend fun insertNote(note: Note)
 
+    @Query("SELECT * FROM note")
+    suspend fun getAllNotes(): List<Note>
+
+    @Delete
+    suspend fun deleteNote(note: Note)
+
+    @Query("SELECT * FROM note WHERE id=:nodeId")
+    suspend fun getNoteById(nodeId: Long): Note
 }

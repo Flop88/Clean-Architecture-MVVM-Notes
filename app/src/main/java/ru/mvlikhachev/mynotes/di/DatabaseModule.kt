@@ -8,7 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.mvlikhachev.mynotes.data.local.AppDatabase
-import ru.mvlikhachev.mynotes.data.local.dao.NoteRepositoryImpl
+import ru.mvlikhachev.mynotes.domain.repository.NoteRepository
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -24,7 +24,7 @@ class DatabaseModule {
     }
 
     @Provides
-    fun provideNoteDao(appDatabase: AppDatabase): NoteRepositoryImpl {
+    fun provideNoteDao(appDatabase: AppDatabase): NoteRepository {
         return appDatabase.noteDao()
     }
 }
